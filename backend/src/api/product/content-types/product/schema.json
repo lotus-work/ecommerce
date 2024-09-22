@@ -1,0 +1,116 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product_id": {
+      "type": "customField",
+      "options": {
+        "uuid-format": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+      },
+      "customField": "plugin::strapi-advanced-uuid.uuid"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "original_price": {
+      "type": "decimal"
+    },
+    "offer_price": {
+      "type": "decimal"
+    },
+    "stock_quantity": {
+      "type": "integer"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "discount_percent": {
+      "type": "integer"
+    },
+    "on_sale": {
+      "type": "boolean",
+      "default": true
+    },
+    "promo_badge": {
+      "type": "enumeration",
+      "enum": [
+        "Hot Picks",
+        "Trending",
+        "Demanding",
+        "Best Seller",
+        "New Arrival",
+        "Limited Stock",
+        "Customer Favorite",
+        "Recommended",
+        "Seasonal",
+        "Discounted"
+      ],
+      "default": "Recommended"
+    },
+    "cover_photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "delivery_time": {
+      "type": "integer",
+      "unique": false
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    },
+    "sub_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::sub-category.sub-category",
+      "mappedBy": "products"
+    },
+    "carts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::cart.cart",
+      "mappedBy": "products"
+    },
+    "wishlists": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::wishlist.wishlist",
+      "inversedBy": "products"
+    },
+    "summary": {
+      "type": "richtext"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    }
+  }
+}

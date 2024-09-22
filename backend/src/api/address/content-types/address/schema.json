@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "singularName": "address",
+    "pluralName": "addresses",
+    "displayName": "Address",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "address_line_1": {
+      "type": "text",
+      "unique": false
+    },
+    "state": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "required": false
+    },
+    "city": {
+      "type": "string"
+    },
+    "postal_code": {
+      "type": "string"
+    },
+    "landmark": {
+      "type": "text"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "addresses"
+    },
+    "address_type": {
+      "type": "enumeration",
+      "enum": [
+        "Home",
+        "Work"
+      ],
+      "default": "Home",
+      "required": true
+    },
+    "address_id": {
+      "type": "customField",
+      "options": {
+        "uuid-format": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+      },
+      "customField": "plugin::strapi-advanced-uuid.uuid"
+    }
+  }
+}
